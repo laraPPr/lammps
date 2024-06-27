@@ -10,8 +10,7 @@ jobs:
         run: |
           module avail LAMMPS
         shell: bash
-  build:
-
+  Pylint:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -29,3 +28,9 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         pylint $(git ls-files '*.py')
+  trailing-whitespace:
+    name: Find Trailing Whitespace
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: harupy/find-trailing-whitespace@master
