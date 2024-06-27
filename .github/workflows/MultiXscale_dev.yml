@@ -1,0 +1,13 @@
+name: MultiXscale-dev-actions
+run-name: Check LAMMPS in EESSI
+on: [push]
+jobs:
+  check-LAMMPS-version-EESSI:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: eessi/github-action-eessi@v3
+      - name: Test LAMMPS
+        run: |
+          module avail LAMMPS
+        shell: bash
+      
