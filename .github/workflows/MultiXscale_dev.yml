@@ -4,7 +4,7 @@ on:
   push:
     paths: 
       - 'python/**'
-      - './.github/**'
+      - '.github/**'
 jobs:
   check-LAMMPS-version-EESSI:
     runs-on: ubuntu-latest
