@@ -1,6 +1,10 @@
 name: MultiXscale-dev-actions
 run-name: Check LAMMPS in EESSI
-on: [push]
+on: 
+  push:
+    paths: 
+      - 'python/**'
+      - './.github/**'
 jobs:
   check-LAMMPS-version-EESSI:
     runs-on: ubuntu-latest
