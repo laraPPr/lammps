@@ -19,5 +19,4 @@ jobs:
             src:
               - 'src/OBMD/**'
       - if: steps.changes.outputs.src == 'true'
-        run: echo hello
-      - uses: harupy/find-trailing-whitespace@master
+        run: echo ${{ steps.filter.outputs.changed_files }}
