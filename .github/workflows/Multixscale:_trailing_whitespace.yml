@@ -19,14 +19,8 @@ jobs:
             src:
               - 'src/OBMD/**'
       - if: steps.changes.outputs.src == 'true'
-        run: echo ${{ steps.filter.outputs.changed_files }}
-  Trailing-whitespace:
-    name: Trailing witespaces
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: harupy/find-trailing-whitespace@master
-        with:
-          files: 'src/OBMD/**'
+        run: echo ${{ steps.changes.outputs.src }}
+
+  
     
   
