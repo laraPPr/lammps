@@ -25,7 +25,8 @@ jobs:
         run: |
           set -e
           tw_lines=""
-          for file in (${{ steps.changes.outputs.changed_files }})
+          files = (${{ steps.changes.outputs.changed_files }})
+          for file in ${files[@]}
           do
             lines=$(egrep -rnIH " +$" $file | cut -f-2 -d ":")
             if [ ! -z "$lines" ]; then
