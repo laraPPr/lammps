@@ -19,5 +19,4 @@ jobs:
             - 'src/OBMD/**'
             - 'examples/OBMD/**'
       - if: steps.changes.outputs.src == 'true'
-      - uses: actions/checkout@v4
-      - uses: harupy/find-trailing-whitespace@master
+        run: echo steps.changes.outputs.src
