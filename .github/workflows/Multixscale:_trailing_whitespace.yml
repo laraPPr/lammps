@@ -22,7 +22,6 @@ jobs:
               - 'examples/OBMD/**'
       - if: steps.changes.outputs.src == 'true'
         run: |
-          # See https://github.com/harupy/find-trailing-whitespace/blob/master/entrypoint.sh
           set -e
           tw_lines=""
           for file in (${{ steps.changes.outputs.changed_files }})
