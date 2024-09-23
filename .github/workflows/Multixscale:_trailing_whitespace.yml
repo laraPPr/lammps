@@ -11,5 +11,13 @@ jobs:
     name: Find Trailing Whitespace
     runs-on: ubuntu-latest
     steps:
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+        filters: |
+          src:
+            - 'src/OBMD/**'
+            - 'examples/OBMD/**'
+      - if: steps.changes.outputs.src == 'true'
       - uses: actions/checkout@v4
       - uses: harupy/find-trailing-whitespace@master
