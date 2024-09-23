@@ -19,7 +19,7 @@ jobs:
             src:
               - 'src/OBMD/**'
       - if: steps.changes.outputs.src == 'true'
-        run: echo ${{ steps.changes.outputs.src }}
+        run: echo ${{ steps.changes.outputs }}
 
   
     
