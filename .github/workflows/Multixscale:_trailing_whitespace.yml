@@ -1,0 +1,15 @@
+name: MultiXscale-trailing-whitespace-actions
+run-name: Check new plugins of LAMMPS
+on:
+  push:
+    paths:
+      - '.github/**'
+      - 'src/OBMD/**'
+      - 'examples/OBMD/**'
+jobs:
+  trailing-whitespace:
+    name: Find Trailing Whitespace
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: harupy/find-trailing-whitespace@master
