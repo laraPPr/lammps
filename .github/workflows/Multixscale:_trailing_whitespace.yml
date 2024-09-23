@@ -20,8 +20,10 @@ jobs:
             changed:
               - 'src/OBMD/**'
               - 'examples/OBMD/**'
-      - if: steps.changes.outputs.src == 'true'
+      - name: Check trailing whitespace
+        if: steps.changes.outputs.src == 'true'
         run: |
+          echo ${{ steps.changes.outputs.changed_files }}
           set -e
           tw_lines=""
           for file in (${{ steps.changes.outputs.changed_files }})
