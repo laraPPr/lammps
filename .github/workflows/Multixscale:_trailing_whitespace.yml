@@ -1,0 +1,44 @@
+name: MultiXscale-trailing-whitespace-actions
+run-name: Check new plugins of LAMMPS
+on:
+  push:
+    paths:
+      - '.github/**'
+      - 'src/OBMD/**'
+      - 'examples/OBMD/**'
+jobs:
+  Get-changed-files:
+    name: Get changed files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          list-files: shell 
+          filters: |
+            changed:
+              - 'src/OBMD/**'
+              - 'examples/OBMD/**'
+      - name: Check trailing whitespace
+        if: ${{ steps.changes.outputs.changed == 'true' }}
+        run: |
+          set -e
+          tw_lines=""
+          files=(${{ steps.changes.outputs.changed_files }})
+          for file in ${files[@]}
+          do
+            lines=$(egrep -rnIH " +$" $file | cut -f-2 -d ":")
+            if [ ! -z "$lines" ]; then
+              tw_lines+=$([[ -z "$tw_lines" ]] && echo "$lines" || echo $'\n'"$lines")
+            fi
+          done
+          exit_code=0
+          # If tw_lines is not empty, change the exit code to 1 to fail the CI.
+          if [ ! -z "$tw_lines" ]; then
+            echo -e "\n***** Lines containing trailing whitespace *****\n"
+            echo -e "${tw_lines[@]}"
+            echo -e "\nFailed.\n"
+            exit_code=1
+          fi
+          exit $exit_code
