@@ -14,9 +14,10 @@ jobs:
       - uses: dorny/paths-filter@v3
         id: changes
         with:
-        filters: |
-          src:
-            - 'src/OBMD/**'
-            - 'examples/OBMD/**'
+          filters: |
+            src:
+              - 'src/OBMD/**'
+              - 'examples/OBMD/**'
       - if: steps.changes.outputs.src == 'true'
-        run: echo steps.changes.outputs.src
+      - uses: actions/checkout@v4
+      - uses: harupy/find-trailing-whitespace@master
