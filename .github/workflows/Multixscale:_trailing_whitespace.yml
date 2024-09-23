@@ -21,7 +21,7 @@ jobs:
               - 'src/OBMD/**'
               - 'examples/OBMD/**'
       - name: Check trailing whitespace
-        if: ${{ steps.changes.outputs.src == 'true' }}
+        if: ${{ steps.changes.outputs.changed == 'true' }}
         run: |
           set -e
           tw_lines=""
