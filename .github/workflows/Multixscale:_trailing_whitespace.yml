@@ -7,8 +7,8 @@ on:
       - 'src/OBMD/**'
       - 'examples/OBMD/**'
 jobs:
-  trailing-whitespace:
-    name: Find Trailing Whitespace
+  Get-changed-files:
+    name: Get changed files
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,3 +20,13 @@ jobs:
               - 'src/OBMD/**'
       - if: steps.changes.outputs.src == 'true'
         run: echo ${{ steps.filter.outputs.changed_files }}
+  Trailing-whitespace:
+    name: Trailing witespaces
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: harupy/find-trailing-whitespace@master
+        with:
+          files: 'src/OBMD/**'
+    
+  
