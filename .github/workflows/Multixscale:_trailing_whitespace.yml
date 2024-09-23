@@ -17,8 +17,9 @@ jobs:
         with:
           list-files: shell 
           filters: |
-            src:
+            changed:
               - 'src/OBMD/**'
+              - 'examples/OBMD/**'
       - if: steps.changes.outputs.src == 'true'
         run: echo ${{ steps.changes.outputs.changed_files }}
 
