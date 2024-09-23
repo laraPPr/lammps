@@ -22,10 +22,9 @@ jobs:
               - 'examples/OBMD/**'
       - if: steps.changes.outputs.src == 'true'
         run: |
+          # See https://github.com/harupy/find-trailing-whitespace/blob/master/entrypoint.sh
           set -e
-
           tw_lines=""
-
           for file in (${{ steps.changes.outputs.changed_files }})
           do
             lines=$(egrep -rnIH " +$" $file | cut -f-2 -d ":")
@@ -33,9 +32,7 @@ jobs:
               tw_lines+=$([[ -z "$tw_lines" ]] && echo "$lines" || echo $'\n'"$lines")
             fi
           done
-
           exit_code=0
-
           # If tw_lines is not empty, change the exit code to 1 to fail the CI.
           if [ ! -z "$tw_lines" ]; then
             echo -e "\n***** Lines containing trailing whitespace *****\n"
@@ -43,6 +40,4 @@ jobs:
             echo -e "\nFailed.\n"
             exit_code=1
           fi
-
           exit $exit_code
- 
