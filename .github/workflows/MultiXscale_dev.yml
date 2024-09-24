@@ -1,0 +1,40 @@
+name: MultiXscale-dev-actions
+run-name: Check LAMMPS in EESSI
+on: 
+  push:
+    paths: 
+      - 'python/**'
+      - '.github/**'
+jobs:
+  check-LAMMPS-version-EESSI:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: eessi/github-action-eessi@v3
+      - name: Test LAMMPS
+        run: |
+          module avail LAMMPS
+        shell: bash
+  Pylint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10"]
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pylint
+    - name: Analysing the code with pylint
+      run: |
+        pylint $(git ls-files '*.py')
+  trailing-whitespace:
+    name: Find Trailing Whitespace
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: harupy/find-trailing-whitespace@master
