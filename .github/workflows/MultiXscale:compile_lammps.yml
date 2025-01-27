@@ -18,5 +18,5 @@ jobs:
         export EASYBUILD_INSTALLPATH=.github/easybuild
         export EASYBUILD_TRACE=1
         eb --show-config
-        eb ./github/workflows/LAMMPS_OBMD-foss-2023a-software-commit.eb --software-commit ${{ github.sha }} -x
+        eb .github/workflows/LAMMPS_OBMD-foss-2023a-software-commit.eb --software-commit ${{ github.sha }} -x
       shell: bash
