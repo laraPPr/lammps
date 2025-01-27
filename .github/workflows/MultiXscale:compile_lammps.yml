@@ -1,0 +1,21 @@
+name: MultiXscale-compile_lammps
+run-name: Compile new Plugin OBMD
+on:
+  push:
+    paths:
+      - '.github/**'
+      - 'src/OBMD/**'
+      - 'examples/OBMD/**'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: eessi/github-action-eessi@v3
+    - name: set up EasyBuild
+      run: |
+        module load EasyBuild/4.9.4
+        export EASYBUILD_SOURCEPATH=.github/easybuild/sources
+        export EASYBUILD_INSTALLPATH=.github/easybuild
+        export EASYBUILD_TRACE=1
+        eb --show-config
+      shell: bash
