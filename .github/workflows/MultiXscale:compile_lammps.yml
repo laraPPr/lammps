@@ -18,5 +18,5 @@ jobs:
         export EASYBUILD_TRACE=1
         eb --show-config
         echo "Get EasyConfig"
-        wget https://raw.githubusercontent.com/EESSI/dev.eessi.io-example/refs/heads/main/easyconfigs/LAMMPS_OBMD-foss-2023a-software-commit.eb
+        wget https://raw.githubusercontent.com/laraPPr/lammps/refs/heads/OBMD_compile_in_CI/.github/workflows/LAMMPS_OBMD-foss-2023a-software-commit.eb
         eb LAMMPS_OBMD-foss-2023a-software-commit.eb --software-commit ${{ github.sha }} --include-easyblocks-from-commit 3d295a926318468e3e8fdd99fdcfea02cd796403
