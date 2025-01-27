@@ -20,3 +20,6 @@ jobs:
         echo "Get EasyConfig"
         wget https://raw.githubusercontent.com/laraPPr/lammps/refs/heads/OBMD_compile_in_CI/.github/workflows/LAMMPS_OBMD-foss-2023a-software-commit.eb
         eb LAMMPS_OBMD-foss-2023a-software-commit.eb --software-commit ${{ github.sha }} --include-easyblocks-from-commit 3d295a926318468e3e8fdd99fdcfea02cd796403
+        module avail LAMMPS
+        module load LAMMPS/${{ github.sha }}-foss-2023a-kokkos-dev_OBMD
+        lmp -in /home/runner/eessi/versions/2023.06/software/linux/x86_64/amd/zen3/software/LAMMPS/${{ github.sha }}-foss-2023a-kokkos-dev_OBMD/example/OBMD/in.OBMD
