@@ -7,8 +7,7 @@ on:
       - 'src/OBMD/**'
       - 'examples/OBMD/**'
 jobs:
-  Get-changed-files:
-    name: Get changed files
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: eessi/github-action-eessi@v3
@@ -19,3 +18,4 @@ jobs:
           export EASYBUILD_INSTALLPATH=.github/easybuild
           export EASYBUILD_TRACE=1
           eb --show-config
+        shell: bash
