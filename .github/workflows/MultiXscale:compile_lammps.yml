@@ -23,4 +23,4 @@ jobs:
         module avail LAMMPS
         module load LAMMPS/${{ github.sha }}-foss-2023a-kokkos-dev_OBMD
         ls /home/runner/eessi/versions/2023.06/software/linux/x86_64/amd/zen3/software/LAMMPS/${{ github.sha }}-foss-2023a-kokkos-dev_OBMD
-        lmp -in /home/runner/eessi/versions/2023.06/software/linux/x86_64/amd/*/software/LAMMPS/${{ github.sha }}-foss-2023a-kokkos-dev_OBMD/example/OBMD/in.OBMD
+        lmp -in /home/runner/eessi/versions/2023.06/software/linux/x86_64/amdzen3/software/LAMMPS/${{ github.sha }}-foss-2023a-kokkos-dev_OBMD/examples/OBMD/in.OBMD
