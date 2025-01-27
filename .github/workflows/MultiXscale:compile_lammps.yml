@@ -14,12 +14,12 @@ jobs:
     - name: set up EasyBuild
       run: |
         module load EasyBuild/4.9.4
-        export EASYBUILD_SOURCEPATH=.github/easybuild/sources
-        export EASYBUILD_INSTALLPATH=.github/easybuild
+        module load EESSI-extend/2023.06-easybuild
         export EASYBUILD_TRACE=1
         eb --show-config
     - name: Get EasyConfig
       run: |
         echo $PWD
-        ls -a /home/runner/work/lammps/lammps/
-        eb .github/workflows/LAMMPS_OBMD-foss-2023a-software-commit.eb --software-commit ${{ github.sha }} -x
+        wget https://raw.githubusercontent.com/EESSI/dev.eessi.io-example/refs/heads/main/easyconfigs/LAMMPS_OBMD-foss-2023a-software-commit.eb
+        ls
+        eb LAMMPS_OBMD-foss-2023a-software-commit.eb --software-commit ${{ github.sha }} -x
