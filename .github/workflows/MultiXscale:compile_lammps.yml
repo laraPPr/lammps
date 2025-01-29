@@ -8,19 +8,22 @@ on:
       - 'examples/OBMD/**'
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-24.04-arm
+          - ubuntu-24.04
     steps:
+    - uses: actions/checkout@v4
     - uses: eessi/github-action-eessi@v3
     - name: set up EasyBuild
       run: |
-        module load EasyBuild/4.9.4
         module load EESSI-extend/2023.06-easybuild
-        export EASYBUILD_TRACE=1
         eb --show-config
         echo "Get EasyConfig"
-        wget https://raw.githubusercontent.com/laraPPr/lammps/refs/heads/OBMD_compile_in_CI/.github/workflows/LAMMPS_OBMD-foss-2023a-software-commit.eb
-        eb LAMMPS_OBMD-foss-2023a-software-commit.eb --software-commit ${{ github.sha }} --include-easyblocks-from-commit 3d295a926318468e3e8fdd99fdcfea02cd796403
+        eb .github/workflows/LAMMPS_OBMD-foss-2023a-software-commit.eb --software-commit ${{ github.sha }} --include-easyblocks-from-commit 3d295a926318468e3e8fdd99fdcfea02cd796403
         module avail LAMMPS
         module load LAMMPS/${{ github.sha }}-foss-2023a-kokkos-dev_OBMD
         ls /home/runner/eessi/versions/2023.06/software/linux/x86_64/amd/zen3/software/LAMMPS/${{ github.sha }}-foss-2023a-kokkos-dev_OBMD
-        mpirun -np 4 lmp -in /home/runner/eessi/versions/2023.06/software/linux/x86_64/amd/zen3/software/LAMMPS/${{ github.sha }}-foss-2023a-kokkos-dev_OBMD/examples/OBMD/in.OBMD
+        mpirun -np 4 --oversubscribe lmp -in /home/runner/eessi/versions/2023.06/software/linux/x86_64/amd/zen3/software/LAMMPS/${{ github.sha }}-foss-2023a-kokkos-dev_OBMD/examples/OBMD/in.OBMD
