@@ -22,7 +22,7 @@ jobs:
         module load EESSI-extend/2023.06-easybuild
         eb --show-config
         echo "Get EasyConfig"
-        eb .github/workflows/LAMMPS_OBMD-foss-2023a-software-commit.eb --software-commit ${{ github.sha }} --include-easyblocks-from-commit 3d295a926318468e3e8fdd99fdcfea02cd796403
+        eb .github/workflows/LAMMPS_OBMD-foss-2023a-software-commit.eb --software-commit ${{ github.sha }} --include-easyblocks-from-commit 3d295a926318468e3e8fdd99fdcfea02cd796403 -d -l
         module avail LAMMPS
         module load LAMMPS/${{ github.sha }}-foss-2023a-kokkos-dev_OBMD
         ls /home/runner/eessi/versions/2023.06/software/linux/x86_64/amd/zen3/software/LAMMPS/${{ github.sha }}-foss-2023a-kokkos-dev_OBMD
