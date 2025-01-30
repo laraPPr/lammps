@@ -27,5 +27,3 @@ jobs:
         module load LAMMPS/${{ github.sha }}-foss-2023a-kokkos-dev_OBMD
         ls $EBROOTLAMMPS
         mpirun -np 4 --oversubscribe lmp -in $EBROOTLAMMPS/examples/OBMD/in.OBMD
-    - name: download artifact
-      uses: actions/download-artifact@v4
