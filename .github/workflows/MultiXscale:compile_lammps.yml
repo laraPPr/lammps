@@ -22,7 +22,7 @@ jobs:
         module load EESSI-extend/2023.06-easybuild
         eb --show-config
         echo "Get EasyConfig"
-        eb .github/workflows/LAMMPS_OBMD-foss-2023a-software-commit.eb --software-commit ${{ github.sha }} --include-easyblocks-from-commit 55dc794b03f5d75a9ab31bc41b960abe1605134a --include-easyblocks lammps.py
+        eb .github/workflows/LAMMPS_OBMD-foss-2023a-software-commit.eb --software-commit ${{ github.sha }} --include-easyblocks-from-pr 3485
         module avail LAMMPS
         module load LAMMPS/${{ github.sha }}-foss-2023a-kokkos-dev_OBMD
         echo $EBROOTLAMMPS
