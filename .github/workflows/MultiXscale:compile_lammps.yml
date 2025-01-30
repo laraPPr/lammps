@@ -25,5 +25,6 @@ jobs:
         eb .github/workflows/LAMMPS_OBMD-foss-2023a-software-commit.eb --software-commit ${{ github.sha }} --include-easyblocks-from-commit 3d295a926318468e3e8fdd99fdcfea02cd796403
         module avail LAMMPS
         module load LAMMPS/${{ github.sha }}-foss-2023a-kokkos-dev_OBMD
+        echo $EBROOTLAMMPS
         ls $EBROOTLAMMPS
         mpirun -np 4 --oversubscribe lmp -in $EBROOTLAMMPS/examples/OBMD/in.OBMD
