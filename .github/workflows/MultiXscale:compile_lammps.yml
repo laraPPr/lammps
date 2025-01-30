@@ -25,7 +25,7 @@ jobs:
         eb .github/workflows/LAMMPS_OBMD-foss-2023a-software-commit.eb --software-commit ${{ github.sha }} --include-easyblocks-from-commit 3d295a926318468e3e8fdd99fdcfea02cd796403
         module avail LAMMPS
         module load LAMMPS/${{ github.sha }}-foss-2023a-kokkos-dev_OBMD
-        ls /home/runner/eessi/versions/2023.06/software/linux/x86_64/amd/zen3/software/LAMMPS/${{ github.sha }}-foss-2023a-kokkos-dev_OBMD
-        mpirun -np 4 --oversubscribe lmp -in /home/runner/eessi/versions/2023.06/software/linux/$EESSI_SOFTWARE_SUBDIR/software/LAMMPS/${{ github.sha }}-foss-2023a-kokkos-dev_OBMD/examples/OBMD/in.OBMD
+        ls $EBROOTLAMMPS
+        mpirun -np 4 --oversubscribe lmp -in $EBROOTLAMMPS/examples/OBMD/in.OBMD
     - name: download artifact
       uses: actions/download-artifact@v4
