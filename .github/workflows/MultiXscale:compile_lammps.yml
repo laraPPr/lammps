@@ -17,7 +17,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - uses: eessi/github-action-eessi@v3
-    - uses: actions/download-artifact@v4
     - name: set up EasyBuild
       run: |
         module load EESSI-extend/2023.06-easybuild
@@ -28,3 +27,5 @@ jobs:
         module load LAMMPS/${{ github.sha }}-foss-2023a-kokkos-dev_OBMD
         ls /home/runner/eessi/versions/2023.06/software/linux/x86_64/amd/zen3/software/LAMMPS/${{ github.sha }}-foss-2023a-kokkos-dev_OBMD
         mpirun -np 4 --oversubscribe lmp -in /home/runner/eessi/versions/2023.06/software/linux/x86_64/amd/zen3/software/LAMMPS/${{ github.sha }}-foss-2023a-kokkos-dev_OBMD/examples/OBMD/in.OBMD
+    - name: download artifact
+      uses: actions/download-artifact@v4
