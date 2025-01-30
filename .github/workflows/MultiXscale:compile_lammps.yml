@@ -26,6 +26,6 @@ jobs:
         module avail LAMMPS
         module load LAMMPS/${{ github.sha }}-foss-2023a-kokkos-dev_OBMD
         ls /home/runner/eessi/versions/2023.06/software/linux/x86_64/amd/zen3/software/LAMMPS/${{ github.sha }}-foss-2023a-kokkos-dev_OBMD
-        mpirun -np 4 --oversubscribe lmp -in /home/runner/eessi/versions/2023.06/software/linux/x86_64/amd/zen3/software/LAMMPS/${{ github.sha }}-foss-2023a-kokkos-dev_OBMD/examples/OBMD/in.OBMD
+        mpirun -np 4 --oversubscribe lmp -in /home/runner/eessi/versions/2023.06/software/linux/$EESSI_SOFTWARE_SUBDIR/software/LAMMPS/${{ github.sha }}-foss-2023a-kokkos-dev_OBMD/examples/OBMD/in.OBMD
     - name: download artifact
       uses: actions/download-artifact@v4
