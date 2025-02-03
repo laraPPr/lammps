@@ -51,11 +51,10 @@ jobs:
         git config --local user.name "github-actions[bot]"
         git add patches/LAMMPS-2Aug2023_lammps_obmd_package.patch
         git commit -a -m "update patch"
-        echo ${{ secrets.TEMPLATE_TOKEN }}
     - name: push changes
       uses: ad-m/github-push-action@master
       with:
         repository: multixscale/dev.eessi.io-lammps-plugin-obmd
         directory: multixscale_dev
         branch: update_patch
-        github_token: ${{ secrets.TEMPLATE_TOKEN }}
+        github_token: ${{ secrets.MULTIXSCALE_TOKEN }}
