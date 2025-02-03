@@ -8,9 +8,8 @@ on:
       - 'examples/OBMD/**'
 jobs:
   build:
+    name: Update patch file in dev.eessi.io-lammps-plugin-obmd
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
     - uses: actions/checkout@v4
       with:
@@ -56,3 +55,4 @@ jobs:
         repository: multixscale/dev.eessi.io-lammps-plugin-obmd
         directory: multixscale_dev
         branch: update_patch
+        github_token: ${{ secrets.GITHUB_TOKEN }}          
