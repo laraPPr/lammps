@@ -52,5 +52,5 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         repository: multixscale/dev.eessi.io-lammps-plugin-obmd
-        path: multixscale_dev
+        directory: multixscale_dev
         branch: update_patch
