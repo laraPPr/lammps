@@ -6,11 +6,11 @@ on:
       - '.github/**'
       - 'src/OBMD/**'
       - 'examples/OBMD/**'
+permissions:
+  contents: write
 jobs:
   build:
     name: Update patch file in dev.eessi.io-lammps-plugin-obmd
-    permissions:
-      contents: write
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
