@@ -11,6 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+          repository: multixscale/dev.eessi.io-lammps-plugin-obmd
+          path: multixscale_dev
+    - uses: actions/checkout@v4
       with: 
         repository: lammps/lammps
         path: lammps_upstream
@@ -19,13 +23,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         path: lammps_dev
-    - uses: actions/checkout@v4
-      with:
-          repository: multixscale/dev.eessi.io-lammps-plugin-obmd
     - name: Generate patch file
       continue-on-error: true
       run: |
-        ls
+        pwd
         echo check pr branch
         ls lammps_dev/src/OBMD
         cat lammps_dev/src/version.h
@@ -35,6 +36,7 @@ jobs:
         diff -ruN --exclude .* lammps_upstream lammps_dev > LAMMPS-2Aug2023_lammps_obmd_package.patch
     - name: Use generated patch file
       run: |
+        pwd
         ls LAMMPS-2Aug2023_lammps_obmd_package.patch
         cat LAMMPS-2Aug2023_lammps_obmd_package.patch
     - name: Push patch to MultiXscale/dev.eessi.io-lammps-plugin-obmd
