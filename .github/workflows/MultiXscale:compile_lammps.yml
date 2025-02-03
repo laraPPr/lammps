@@ -20,7 +20,7 @@ jobs:
         repository: lammps/lammps
         path: lammps_upstream
         # This commit needs to be updated when developping on top of another commit of lammps!
-        ref: 3d295a926318468e3e8fdd99fdcfea02cd796403
+        ref: 0cb72423b8ed2fdf138831c145a3bfb6ea42394e
     - uses: actions/checkout@v4
       with:
         path: lammps_dev
