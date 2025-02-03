@@ -11,12 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-      path: new_lammps
       with: 
         repository: lammps/lammps
         path: lammps_upstream
         ref: 27e8d0f19cfd60ff513828af74d07d2c8f3c4451
     - uses: actions/checkout@v4
+      with:
+        path: new_lammps
     - name: Generate patch file
       run: |
         pwd
