@@ -6,8 +6,6 @@ on:
       - '.github/**'
       - 'src/OBMD/**'
       - 'examples/OBMD/**'
-permissions:
-  contents: write
 jobs:
   build:
     name: Update patch file in dev.eessi.io-lammps-plugin-obmd
@@ -51,13 +49,13 @@ jobs:
         cp ../LAMMPS-2Aug2023_lammps_obmd_package.patch patches/.
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git config --unset-all http.https://github.com/.extraheader
         git add patches/LAMMPS-2Aug2023_lammps_obmd_package.patch
         git commit -a -m "update patch"
+        echo ${{ secrets.TEMPLATE_TOKEN }}
     - name: push changes
       uses: ad-m/github-push-action@master
       with:
         repository: multixscale/dev.eessi.io-lammps-plugin-obmd
         directory: multixscale_dev
         branch: update_patch
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.TEMPLATE_TOKEN }}
