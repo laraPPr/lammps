@@ -29,8 +29,8 @@ jobs:
         cat lammps_upstream/src/version.h
         # make patch file
         diff -ruN lammps_upstream lammps_dev > LAMMPS-2Aug2023_lammps_obmd_package.patch
-        cat LAMMPS-2Aug2023_lammps_obmd_package.patch
     - name: Use generated patch file
       run: |
         ls LAMMPS-2Aug2023_lammps_obmd_package.patch
+        cat LAMMPS-2Aug2023_lammps_obmd_package.patch
         
