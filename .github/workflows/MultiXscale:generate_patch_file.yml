@@ -1,0 +1,18 @@
+name: MultiXscale-generate_lammps_patch
+run-name: Generate a patch for the OBMD plugin
+on:
+  push:
+    paths:
+      - '.github/**'
+      - 'src/OBMD/**'
+      - 'examples/OBMD/**'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Generate patch file
+      run: |
+        pwd
+        git remote -v
+        ls src/OBMD
