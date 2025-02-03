@@ -11,10 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      with: 
+        repository: lammps/lammps
+    - uses: actions/checkout@v4
     - name: Generate patch file
       run: |
         pwd
-        git remote add lammps https://github.com/laraPPr/lammps
+        git remote add lammps https://github.com/laraPPr/lammps.git
         git remote -v
         git branch
         ls src/OBMD
