@@ -44,4 +44,7 @@ jobs:
       run: |
         cd multixscale_dev
         git branch
+        cp ../LAMMPS-2Aug2023_lammps_obmd_package.patch patches/.
+        git commit -a -m "update patch"
+        git push origin update_patch
         
