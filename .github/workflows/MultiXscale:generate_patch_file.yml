@@ -18,6 +18,8 @@ jobs:
           repository: multixscale/dev.eessi.io-lammps-plugin-obmd
           path: multixscale_dev
           ref: update_patch
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
+          fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
     - uses: actions/checkout@v4
       with: 
         repository: lammps/lammps
