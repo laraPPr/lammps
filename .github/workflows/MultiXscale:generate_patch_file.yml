@@ -20,6 +20,7 @@ jobs:
       with:
         path: lammps_dev
     - name: Generate patch file
+      continue-on-error: true
       run: |
         echo check pr branch
         ls lammps_dev/src/OBMD
@@ -27,7 +28,7 @@ jobs:
         echo check upstream branch
         cat lammps_upstream/src/version.h
         # make patch file
-        diff -ruN --exclude C_10_10.mesocnt lammps_upstream lammps_dev > LAMMPS-2Aug2023_lammps_obmd_package.patch
+        diff -ruN lammps_upstream lammps_dev > LAMMPS-2Aug2023_lammps_obmd_package.patch
         cat LAMMPS-2Aug2023_lammps_obmd_package.patch
     - name: Use generated patch file
       run: |
