@@ -14,6 +14,7 @@ jobs:
       with: 
         repository: lammps/lammps
         path: lammps_upstream
+        # This commit needs to be updated when developping on top of another commit of lammps!
         ref: 27e8d0f19cfd60ff513828af74d07d2c8f3c4451
     - uses: actions/checkout@v4
       with:
@@ -21,16 +22,11 @@ jobs:
     - name: Generate patch file
       run: |
         pwd
-        ls src/OBMD
-        # This commit needs to be updated when developping on top of another commit of lammps!
-        #git checkout 27e8d0f19cfd60ff513828af74d07d2c8f3c4451 # upstream commit of lammps 2Aug2023_update2
-        #git checkout -b upstream_lammps
-        git branch
-        #ls src/OBMD
-        #git checkout ${{ github.ref_name }}
-        #ls src/OBMD
-        echo $HOME/work
-        ls $HOME/work/lammps/lammps/upstream
+        ls
         ls $HOME/work/lammps/lammps/new_lammps
-        cat $HOME/work/lammps/lammps/upstream/scr/version.h
+        ls new_lammps/src/OBMD
+        cat new_lammps/src/version.h
+        echo upstream
+        ls $HOME/work/lammps/lammps/upstream
+        cat $HOME/work/lammps/lammps/upstream/src/version.h
         
