@@ -28,4 +28,7 @@ jobs:
         echo check upstream branch
         ls lammps_upstream
         cat lammps_upstream/src/version.h
+        # make patch file
+        diff -ru lammps_upstream new_lammps > LAMMPS-2Aug2023_lammps_obmd_package.patch
+        cat LAMMPS-2Aug2023_lammps_obmd_package.patch
         
