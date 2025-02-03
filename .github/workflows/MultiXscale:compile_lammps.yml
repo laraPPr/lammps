@@ -41,7 +41,7 @@ jobs:
     - name: set up EasyBuild
       run: |
         pwd
-        cp LAMMPS-2Aug2023_lammps_obmd_package.patch multixscale_dev/easyconfigs/l/LAMMPS/.
+        cp LAMMPS-2Aug2023_lammps_obmd_package.patch multixscale_dev/.
         module load EESSI-extend/2023.06-easybuild
         eb --show-config
         echo ${{ github.sha }}
