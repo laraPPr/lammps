@@ -14,6 +14,7 @@ jobs:
       with:
           repository: multixscale/dev.eessi.io-lammps-plugin-obmd
           path: multixscale_dev
+          ref: update_patch
     - uses: actions/checkout@v4
       with: 
         repository: lammps/lammps
@@ -41,5 +42,6 @@ jobs:
         cat LAMMPS-2Aug2023_lammps_obmd_package.patch
     - name: Push patch to MultiXscale/dev.eessi.io-lammps-plugin-obmd
       run: |
-        ls
+        cd multixscale_dev
+        git branch
         
