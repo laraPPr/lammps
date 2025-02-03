@@ -22,7 +22,7 @@ jobs:
         # This commit needs to be updated when developping on top of another commit of lammps!
         #git checkout 27e8d0f19cfd60ff513828af74d07d2c8f3c4451 # upstream commit of lammps 2Aug2023_update2
         #git checkout -b upstream_lammps
-        git -a branch
+        git branch
         #ls src/OBMD
         #git checkout ${{ github.ref_name }}
         #ls src/OBMD
