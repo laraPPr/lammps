@@ -28,4 +28,5 @@ jobs:
         #git checkout ${{ github.ref_name }}
         #ls src/OBMD
         echo $HOME/work
+        ls $HOME/work
         
