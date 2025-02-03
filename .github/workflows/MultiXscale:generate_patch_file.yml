@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      path: new_lammps
       with: 
         repository: lammps/lammps
         path: lammps_upstream
@@ -28,5 +29,7 @@ jobs:
         #git checkout ${{ github.ref_name }}
         #ls src/OBMD
         echo $HOME/work
-        ls $HOME/work
+        ls $HOME/work/lammps/lammps/upstream
+        ls $HOME/work/lammps/lammps/new_lammps
+        cat $HOME/work/lammps/lammps/upstream/scr/version.h
         
