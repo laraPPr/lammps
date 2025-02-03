@@ -21,12 +21,11 @@ jobs:
         path: new_lammps
     - name: Generate patch file
       run: |
-        pwd
-        ls
-        ls $HOME/work/lammps/lammps/new_lammps
+        echo check pr branch
+        ls new_lammps
         ls new_lammps/src/OBMD
         cat new_lammps/src/version.h
-        echo upstream
-        ls $HOME/work/lammps/lammps/upstream
-        cat $HOME/work/lammps/lammps/upstream/src/version.h
+        echo check upstream branch
+        ls lammps_upstream
+        cat lammps_upstream/src/version.h
         
