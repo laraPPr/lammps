@@ -25,6 +25,7 @@ jobs:
     - name: Generate patch file
       continue-on-error: true
       run: |
+        ls
         echo check pr branch
         ls lammps_dev/src/OBMD
         cat lammps_dev/src/version.h
