@@ -18,17 +18,18 @@ jobs:
         ref: 27e8d0f19cfd60ff513828af74d07d2c8f3c4451
     - uses: actions/checkout@v4
       with:
-        path: new_lammps
+        path: lammps_dev
     - name: Generate patch file
       run: |
         echo check pr branch
-        ls new_lammps
-        ls new_lammps/src/OBMD
-        cat new_lammps/src/version.h
+        ls lammps_dev/src/OBMD
+        cat lammps_dev/src/version.h
         echo check upstream branch
-        ls lammps_upstream
         cat lammps_upstream/src/version.h
         # make patch file
-        diff -ru lammps_upstream new_lammps > LAMMPS-2Aug2023_lammps_obmd_package.patch
+        diff -ruN --exclude C_10_10.mesocnt lammps_upstream lammps_dev > LAMMPS-2Aug2023_lammps_obmd_package.patch
         cat LAMMPS-2Aug2023_lammps_obmd_package.patch
+    - name: Use generated patch file
+      run: |
+        ls LAMMPS-2Aug2023_lammps_obmd_package.patch
         
