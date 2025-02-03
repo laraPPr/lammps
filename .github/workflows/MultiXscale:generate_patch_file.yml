@@ -57,4 +57,4 @@ jobs:
         repository: multixscale/dev.eessi.io-lammps-plugin-obmd
         directory: multixscale_dev
         branch: update_patch
-        github_token: ${{ secrets.GITHUB_TOKEN }}          
+        github_token: ${{ secrets.GITHUB_TOKEN }}
