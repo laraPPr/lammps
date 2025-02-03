@@ -32,7 +32,6 @@ jobs:
     - name: Check if patch file was generated
       run: |
         ls LAMMPS-2Aug2023_lammps_obmd_package.patch
-        cp LAMMPS-2Aug2023_lammps_obmd_package.patch multixscale_dev/easyconfigs/l/LAMMPS/.
         cat LAMMPS-2Aug2023_lammps_obmd_package.patch
     - uses: actions/checkout@v4
       with: 
@@ -41,6 +40,8 @@ jobs:
     - uses: eessi/github-action-eessi@v3
     - name: set up EasyBuild
       run: |
+        pwd
+        cp LAMMPS-2Aug2023_lammps_obmd_package.patch multixscale_dev/easyconfigs/l/LAMMPS/.
         module load EESSI-extend/2023.06-easybuild
         eb --show-config
         echo ${{ github.sha }}
