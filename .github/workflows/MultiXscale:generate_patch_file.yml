@@ -23,7 +23,7 @@ jobs:
         repository: lammps/lammps
         path: lammps_upstream
         # This commit needs to be updated when developping on top of another commit of lammps!
-        ref: 27e8d0f19cfd60ff513828af74d07d2c8f3c4451
+        ref: ${{ vars.LAMMPS_COMMIT_PATCH }}
     - uses: actions/checkout@v4
       with:
         path: lammps_dev
@@ -46,10 +46,10 @@ jobs:
       run: |
         cd multixscale_dev
         git branch
-        cp ../LAMMPS-2Aug2023_lammps_obmd_package.patch patches/.
+        cp ../LAMMPS-2Aug2023_lammps_obmd_package.patch easyconfig/l/LAMMPS/.
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git add patches/LAMMPS-2Aug2023_lammps_obmd_package.patch
+        git add easyconfig/l/LAMMPS/LAMMPS-2Aug2023_lammps_obmd_package.patch
         git commit -a -m "update patch"
     - name: push changes
       uses: ad-m/github-push-action@master
