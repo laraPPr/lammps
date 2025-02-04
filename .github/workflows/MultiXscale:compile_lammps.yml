@@ -1,0 +1,54 @@
+name: MultiXscale-compile_lammps
+run-name: Compile new Plugin OBMD
+on:
+  push:
+    paths:
+      - '.github/**'
+      - 'src/OBMD/**'
+      - 'examples/OBMD/**'
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-24.04-arm
+          - ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        repository: lammps/lammps
+        path: lammps_upstream
+        # Can change the LAMMPS commit which will be build by updating LAMMPS_COMMIT_PATCH https://github.com/laraPPr/lammps/settings/variables/actions
+        ref: ${{ vars.LAMMPS_COMMIT_PATCH }}
+    - uses: actions/checkout@v4
+      with:
+        path: lammps_dev
+    - name: Generate patch file
+      continue-on-error: true
+      run: |
+        # make patch file
+        diff -ruN --exclude .* lammps_upstream lammps_dev > LAMMPS-2Aug2023_lammps_obmd_package.patch
+    - name: Check if patch file was generated
+      run: |
+        ls LAMMPS-2Aug2023_lammps_obmd_package.patch
+        cat LAMMPS-2Aug2023_lammps_obmd_package.patch
+    - uses: actions/checkout@v4
+      with: 
+        repository: multixscale/dev.eessi.io-lammps-plugin-obmd
+        path: multixscale_dev
+    - uses: eessi/github-action-eessi@v3
+    - name: set up EasyBuild
+      run: |
+        pwd
+        mkdir -p multixscale_dev/easyconfigs/l/LAMMPS && cp LAMMPS-2Aug2023_lammps_obmd_package.patch multixscale_dev/easyconfigs/l/LAMMPS/.
+        module load EESSI-extend/2023.06-easybuild
+        eb --show-config
+        echo "Get EasyConfig"
+        # Can change the LAMMPS commit which will be build by updating LAMMPS_COMMIT_BUILD https://github.com/laraPPr/lammps/settings/variables/actions
+        eb multixscale_dev/easyconfigs/LAMMPS_OBMD-foss-2023a-software-commit.eb --software-commit ${{ vars.LAMMPS_COMMIT_BUILD }} --include-easyblocks-from-commit 3725813434972232adde2d84c882801fae629ddf
+        module avail LAMMPS
+        module load LAMMPS/${{ vars.LAMMPS_COMMIT_BUILD }}-foss-2023a-kokkos-dev_OBMD
+        echo $EBROOTLAMMPS
+        ls $EBROOTLAMMPS
+        mpirun -np 4 --oversubscribe lmp -in $EBROOTLAMMPS/examples/OBMD/in.OBMD
