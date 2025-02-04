@@ -19,7 +19,8 @@ jobs:
       with:
         repository: lammps/lammps
         path: lammps_upstream
-        # This commit needs to be updated when developping on top of another commit of lammps!
+        # This commit needs to be updated when developping on top of another commit of lammps! 
+        # by setting a new value here https://github.com/laraPPr/lammps/settings/variables/actions. 
         ref: ${{ LAMMPS_COMMIT }}
     - uses: actions/checkout@v4
       with:
