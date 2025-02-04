@@ -20,7 +20,7 @@ jobs:
         repository: lammps/lammps
         path: lammps_upstream
         # Can change the LAMMPS commit which will be build by updating LAMMPS_COMMIT_PATCH https://github.com/laraPPr/lammps/settings/variables/actions
-        ref: ${{ env.LAMMPS_COMMIT_PATCH }}
+        ref: 27e8d0f19cfd60ff513828af74d07d2c8f3c4451
     - uses: actions/checkout@v4
       with:
         path: lammps_dev
@@ -31,6 +31,8 @@ jobs:
         diff -ruN --exclude .* lammps_upstream lammps_dev > LAMMPS-2Aug2023_lammps_obmd_package.patch
     - name: Check if patch file was generated
       run: |
+        echo ${{ env.LAMMPS_COMMIT_BUILD }}
+        echo ${{ env.LAMMPS_COMMIT_PATCH }}
         ls LAMMPS-2Aug2023_lammps_obmd_package.patch
         cat LAMMPS-2Aug2023_lammps_obmd_package.patch
     - uses: actions/checkout@v4
