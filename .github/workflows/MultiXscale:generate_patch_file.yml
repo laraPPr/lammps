@@ -1,0 +1,60 @@
+name: MultiXscale-generate_lammps_patch
+run-name: Generate a patch for the OBMD plugin
+on:
+  push:
+    paths:
+      - '.github/**'
+      - 'src/OBMD/**'
+      - 'examples/OBMD/**'
+jobs:
+  build:
+    name: Update patch file in dev.eessi.io-lammps-plugin-obmd
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+          repository: multixscale/dev.eessi.io-lammps-plugin-obmd
+          path: multixscale_dev
+          ref: update_patch
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
+          fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
+    - uses: actions/checkout@v4
+      with: 
+        repository: lammps/lammps
+        path: lammps_upstream
+        # This commit needs to be updated when developping on top of another commit of lammps!
+        ref: ${{ vars.LAMMPS_COMMIT_PATCH }}
+    - uses: actions/checkout@v4
+      with:
+        path: lammps_dev
+    - name: Generate patch file
+      continue-on-error: true
+      run: |
+        pwd
+        echo check pr branch
+        ls lammps_dev/src/OBMD
+        cat lammps_dev/src/version.h
+        echo check upstream branch
+        cat lammps_upstream/src/version.h
+        # make patch file
+        diff -ruN --exclude .* lammps_upstream lammps_dev > LAMMPS-2Aug2023_lammps_obmd_package.patch
+    - name: Check if patch file was generated
+      run: |
+        ls LAMMPS-2Aug2023_lammps_obmd_package.patch
+        cat LAMMPS-2Aug2023_lammps_obmd_package.patch
+    - name: Push patch to MultiXscale/dev.eessi.io-lammps-plugin-obmd
+      run: |
+        cd multixscale_dev
+        git branch
+        cp ../LAMMPS-2Aug2023_lammps_obmd_package.patch easyconfigs/l/LAMMPS/.
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add easyconfigs/l/LAMMPS/LAMMPS-2Aug2023_lammps_obmd_package.patch
+        git commit -a -m "update patch"
+    - name: push changes
+      uses: ad-m/github-push-action@master
+      with:
+        repository: multixscale/dev.eessi.io-lammps-plugin-obmd
+        directory: multixscale_dev
+        branch: update_patch
+        github_token: ${{ secrets.MULTIXSCALE_TOKEN }}
