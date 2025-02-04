@@ -46,7 +46,7 @@ jobs:
       run: |
         cd multixscale_dev
         git branch
-        cp ../LAMMPS-2Aug2023_lammps_obmd_package.patch easyconfig/l/LAMMPS/.
+        cp ../LAMMPS-2Aug2023_lammps_obmd_package.patch easyconfigs/l/LAMMPS/.
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
         git add easyconfig/l/LAMMPS/LAMMPS-2Aug2023_lammps_obmd_package.patch
