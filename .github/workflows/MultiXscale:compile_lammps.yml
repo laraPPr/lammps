@@ -20,7 +20,7 @@ jobs:
         repository: lammps/lammps
         path: lammps_upstream
         # This commit needs to be updated when developping on top of another commit of lammps!
-        ref: 27e8d0f19cfd60ff513828af74d07d2c8f3c4451
+        ref: ${{ LAMMPS_COMMIT }}
     - uses: actions/checkout@v4
       with:
         path: lammps_dev
@@ -46,7 +46,7 @@ jobs:
         eb --show-config
         echo ${{ github.sha }}
         echo "Get EasyConfig"
-        eb multixscale_dev/easyconfigs/LAMMPS_OBMD-foss-2023a-software-commit.eb --software-commit ${{ github.sha }} --include-easyblocks-from-commit 3725813434972232adde2d84c882801fae629ddf
+        eb multixscale_dev/easyconfigs/LAMMPS_OBMD-foss-2023a-software-commit.eb --software-commit ${{ LAMMPS_COMMIT }} --include-easyblocks-from-commit 3725813434972232adde2d84c882801fae629ddf
         module avail LAMMPS
         module load LAMMPS/${{ github.sha }}-foss-2023a-kokkos-dev_OBMD
         echo $EBROOTLAMMPS
