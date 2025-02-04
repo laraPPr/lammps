@@ -44,12 +44,11 @@ jobs:
         mkdir -p multixscale_dev/easyconfigs/l/LAMMPS && cp LAMMPS-2Aug2023_lammps_obmd_package.patch multixscale_dev/easyconfigs/l/LAMMPS/.
         module load EESSI-extend/2023.06-easybuild
         eb --show-config
-        echo ${{ github.sha }}
         echo "Get EasyConfig"
         # Can change the LAMMPS commit which will be build by updating LAMMPS_COMMIT_BUILD https://github.com/laraPPr/lammps/settings/variables/actions
         eb multixscale_dev/easyconfigs/LAMMPS_OBMD-foss-2023a-software-commit.eb --software-commit ${{ vars.LAMMPS_COMMIT_BUILD }} --include-easyblocks-from-commit 3725813434972232adde2d84c882801fae629ddf
         module avail LAMMPS
-        module load LAMMPS/${{ github.sha }}-foss-2023a-kokkos-dev_OBMD
+        module load LAMMPS/${{ vars.LAMMPS_COMMIT_BUILD }}-foss-2023a-kokkos-dev_OBMD
         echo $EBROOTLAMMPS
         ls $EBROOTLAMMPS
         mpirun -np 4 --oversubscribe lmp -in $EBROOTLAMMPS/examples/OBMD/in.OBMD
