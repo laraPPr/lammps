@@ -31,8 +31,8 @@ jobs:
         diff -ruN --exclude .* lammps_upstream lammps_dev > LAMMPS-2Aug2023_lammps_obmd_package.patch
     - name: Check if patch file was generated
       run: |
-        echo ${{ env.LAMMPS_COMMIT_BUILD }}
-        echo ${{ env.LAMMPS_COMMIT_PATCH }}
+        echo ${{ vars.LAMMPS_COMMIT_BUILD }}
+        echo ${{ vars.LAMMPS_COMMIT_PATCH }}
         ls LAMMPS-2Aug2023_lammps_obmd_package.patch
         cat LAMMPS-2Aug2023_lammps_obmd_package.patch
     - uses: actions/checkout@v4
