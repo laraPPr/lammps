@@ -1,5 +1,5 @@
 name: MultiXscale-compile_lammps
-run-name: Compile new Plugin OBMD
+run-name: Compile LAMMPS
 on:
   push:
     paths:
