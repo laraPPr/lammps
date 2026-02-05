@@ -1,0 +1,19 @@
+name: MultiXscale-compile_lammps
+run-name: Compile LAMMPS
+on:
+  push:
+    paths:
+      - '.github/**'
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-24.04-arm
+          - ubuntu-24.04
+    steps:
+    - uses: eessi/github-action-eessi@v3
+    - name: Install LAMMPS
+      run: |
+        module avail EESSI
