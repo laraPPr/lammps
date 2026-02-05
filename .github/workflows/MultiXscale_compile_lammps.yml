@@ -18,4 +18,6 @@ jobs:
         eessi_stack_version: "2025.06"
     - name: Install LAMMPS
       run: |
-        module avail EESSI
+        module load EESSI-extend/2025.06-easybuild
+        pwd
+        ls
