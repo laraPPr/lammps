@@ -14,6 +14,8 @@ jobs:
           - ubuntu-24.04
     steps:
     - uses: eessi/github-action-eessi@v3
+      with:
+        eessi_stack_version: "2025.06"
     - name: Install LAMMPS
       run: |
         module avail EESSI
