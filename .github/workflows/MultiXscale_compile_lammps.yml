@@ -13,6 +13,7 @@ jobs:
           - ubuntu-24.04-arm
           - ubuntu-24.04
     steps:
+    - uses: actions/checkout@v4
     - uses: eessi/github-action-eessi@v3
       with:
         eessi_stack_version: "2025.06"
@@ -21,3 +22,5 @@ jobs:
         module load EESSI-extend/2025.06-easybuild
         pwd
         ls
+        eb --version
+        eb --from-commit 0fb7d96f8f1e0b846a6cf1609dbe689646f15ed9 LAMMPS-22Jul2025-foss-2024a-kokkos.eb -M
