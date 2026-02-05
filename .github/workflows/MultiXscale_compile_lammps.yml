@@ -22,3 +22,14 @@ jobs:
         module load EESSI-extend/2025.06-easybuild
         eb --version
         eb --from-commit 0fb7d96f8f1e0b846a6cf1609dbe689646f15ed9 .github/workflows/LAMMPS-22Jul2025-foss-2024a-kokkos_small.eb --robot
+    - name: Copy /tmp/eb-* to runner temp on failure
+      if: failure()
+      run: |
+        mkdir -p $RUNNER_TEMP/eb-dump
+        cp -r /tmp/eb_* $RUNNER_TEMP/eb-dump || echo "no matching dirs"
+    - name: Upload temp files on failure
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: temp-files
+        path: ${{ runner.temp }}/eb-dump
