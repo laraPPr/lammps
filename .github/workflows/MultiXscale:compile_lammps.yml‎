@@ -16,7 +16,7 @@ jobs:
     - uses: eessi/github-action-eessi@v3
     - name: set up EasyBuild and install LAMMPS
       run: |
-        pwd
+        # pwd
         module avail EESSI
         module load EESSI-extend/2023.06-easybuild
         eb --show-config
