@@ -1,0 +1,31 @@
+name: MultiXscale-compile_lammps
+run-name: Compile new Plugin OBMD
+on:
+  push:
+    paths:
+      - '.github/**'
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-24.04-arm
+          - ubuntu-24.04
+    steps:
+    - uses: eessi/github-action-eessi@v3
+    - name: set up EasyBuild and install LAMMPS
+      run: |
+        pwd
+        module avail EESSI
+        module load EESSI-extend/2023.06-easybuild
+        eb --show-config
+        echo "Get EasyConfig"
+        #eb --from-commit 0fb7d96f8f1e0b846a6cf1609dbe689646f15ed9 LAMMPS-29Aug2024_update2-foss-2023a-kokkos.eb
+
+        # eb multixscale_dev/easyconfigs/LAMMPS_OBMD-foss-2023a-software-commit.eb --software-commit ${{ vars.LAMMPS_COMMIT_BUILD }} --include-easyblocks-from-commit 3725813434972232adde2d84c882801fae629ddf
+        # module avail LAMMPS
+        # module load LAMMPS/${{ vars.LAMMPS_COMMIT_BUILD }}-foss-2023a-kokkos-dev_OBMD
+        # echo $EBROOTLAMMPS
+        #ls $EBROOTLAMMPS
+        #mpirun -np 4 --oversubscribe lmp -in $EBROOTLAMMPS/ex
