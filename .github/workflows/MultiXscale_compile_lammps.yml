@@ -1,0 +1,35 @@
+name: MultiXscale-compile_lammps
+run-name: Compile LAMMPS
+on:
+  push:
+    paths:
+      - '.github/**'
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-24.04-arm
+          - ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v4
+    - uses: eessi/github-action-eessi@v3
+      with:
+        eessi_stack_version: "2025.06"
+    - name: Install LAMMPS
+      run: |
+        module load EESSI-extend/2025.06-easybuild
+        eb --version
+        eb .github/workflows/kim-api-2.4.1-GCC-13.3.0.eb .github/workflows/LAMMPS-22Jul2025-foss-2024a-kokkos_small.eb --robot
+    - name: Copy /tmp/eb-* to runner temp on failure
+      if: failure()
+      run: |
+        mkdir -p $RUNNER_TEMP/eb-dump
+        cp -r /tmp/eb-* $RUNNER_TEMP/eb-dump || echo "no matching dirs"
+    - name: Upload temp files on failure
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: temp-files
+        path: ${{ runner.temp }}/eb-dump
