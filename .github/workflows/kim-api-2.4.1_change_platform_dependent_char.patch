@@ -58,7 +58,7 @@ diff -ruN kim-api-2.4.1.orig/cpp/src/libb64/libb64/include/b64/decode.h kim-api-
  		}
  
 -		int decode(const char* code_in, const int length_in, char* plaintext_out)
-+		int decode(const signed char* code_in, const int length_in, char* plaintext_out)
++		int decode(const signed char* code_in, const int length_in, signed char* plaintext_out)
  		{
  			return base64_decode_block(code_in, length_in, plaintext_out, &_state);
  		}
