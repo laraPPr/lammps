@@ -21,7 +21,7 @@ jobs:
       run: |
         module load EESSI-extend/2025.06-easybuild
         eb --version
-        eb --from-commit 0fb7d96f8f1e0b846a6cf1609dbe689646f15ed9 .github/workflows/LAMMPS-22Jul2025-foss-2024a-kokkos_small.eb --robot
+        eb .github/workflows/kim-api-2.4.1-GCC-13.3.0.eb .github/workflows/LAMMPS-22Jul2025-foss-2024a-kokkos_small.eb --robot
     - name: Copy /tmp/eb-* to runner temp on failure
       if: failure()
       run: |
