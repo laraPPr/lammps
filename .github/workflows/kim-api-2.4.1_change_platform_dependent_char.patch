@@ -34,7 +34,7 @@ diff -ruN kim-api-2.4.1.orig/cpp/src/libb64/libb64/include/b64/cencode.h kim-api
  void base64_init_encodestate(base64_encodestate* state_in);
  
 -char base64_encode_value(char value_in);
-+signed char base64_encode_value(char value_in);
++signed char base64_encode_value(signed char value_in);
  
 -int base64_encode_block(const char* plaintext_in, int length_in, char* code_out, base64_encodestate* state_in);
 +int base64_encode_block(const signed char* plaintext_in, int length_in, signed char* code_out, base64_encodestate* state_in);
